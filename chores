@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clickable Cards with Timer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .card {
+            width: 200px;
+            height: 200px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            margin: 10px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        button {
+            padding: 8px 16px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        #timer-display {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card" onclick="openActivity('Activity 1')">
+        <h2>Activity 1</h2>
+        <p>Description for Activity 1.</p>
+        <button onclick="startTimer('Activity 1')">Start</button>
+        <button onclick="stopTimer()">Stop</button>
+        <button onclick="endActivity('Activity 1')">End</button>
+        <div id="timer-display"></div>
+    </div>
+
+    <div class="card" onclick="openActivity('Activity 2')">
+        <h2>Activity 2</h2>
+        <p>Description for Activity 2.</p>
+        <button onclick="startTimer('Activity 2')">Start</button>
+        <button onclick="stopTimer()">Stop</button>
+        <button onclick="endActivity('Activity 2')">End</button>
+        <div id="timer-display"></div>
+    </div>
+
+    <div class="card" onclick="openActivity('Activity 3')">
+        <h2>Activity 3</h2>
+        <p>Description for Activity 3.</p>
+        <button onclick="startTimer('Activity 3')">Start</button>
+        <button onclick="stopTimer()">Stop</button>
+        <button onclick="endActivity('Activity 3')">End</button>
+        <div id="timer-display"></div>
+    </div>
+
+    <script>
+        let timerInterval;
+
+        function openActivity(activityName) {
+            // You can add logic here to perform actions when a card is clicked
+            alert('Clicked on ' + activityName);
+        }
+
+        function startTimer(activityName) {
+            let seconds = 0;
+            const timerDisplay = document.getElementById('timer-display');
+
+            timerInterval = setInterval(() => {
+                seconds++;
+                timerDisplay.innerText = `${activityName} Timer: ${formatTime(seconds)}`;
+            }, 1000);
+        }
+
+        function stopTimer() {
+            clearInterval(timerInterval);
+        }
+
+        function endActivity(activityName) {
+            stopTimer();
+            alert(`${activityName} ended`);
+        }
+
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = seconds % 60;
+            return `${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
+        }
+    </script>
+</body>
+</html>
